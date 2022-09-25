@@ -35,6 +35,14 @@ class WelcomePage : Fragment() {
             it.findNavController().navigate(R.id.action_welcomePage_to_loginPage)
         }
 
+        binding.register.setOnClickListener {
+            //Navigation.findNavController(view).navigate(R.id.action_welcomePage_to_loginPage)
+            //Navigation.findNavController(requireActivity(),R.id.welcomePage).navigate(R.id.action_welcomePage_to_loginPage)
+            //it.findNavController().navigate(R.id.action_welcomePage_to_loginPage)
+
+            it.findNavController().navigate(R.id.action_welcomePage_to_registerPage)
+        }
+
         return binding.root
     }
 
