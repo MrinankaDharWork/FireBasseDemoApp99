@@ -37,11 +37,11 @@ class LoginPage : Fragment(R.layout.fragment_login_page) {
             val enteredEmail = binding.emailInput.text.toString()
             val enteredPassword = binding.passwordInput.text.toString()
 
-            if (TextUtils.isEmpty((enteredEmail))){
+            if (TextUtils.isEmpty(enteredEmail)){
                 binding.emailInput.error = "This field can not be left empty"
             }
-            if (TextUtils.isEmpty((enteredPassword))){
-                binding.emailInput.error = "This field can not be left empty"
+            if (TextUtils.isEmpty(enteredPassword)){
+                binding.passwordInput.error = "This field can not be left empty"
             }
             else{
                 it.findNavController().navigate(R.id.action_loginPage_to_mainPage)
