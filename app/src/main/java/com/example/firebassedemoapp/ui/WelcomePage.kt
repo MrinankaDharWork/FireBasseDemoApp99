@@ -33,6 +33,15 @@ class WelcomePage : Fragment() {
             //it.findNavController().navigate(R.id.action_welcomePage_to_loginPage)
 
             it.findNavController().navigate(R.id.action_welcomePage_to_loginPage)
+
+
+
+
+
+
+
+
+            println("helloooooo")
         }
 
         binding.register.setOnClickListener {
