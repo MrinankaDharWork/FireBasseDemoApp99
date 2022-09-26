@@ -45,5 +45,9 @@
         android:id="@+id/mainPage"
         android:name="com.example.firebassedemoapp.ui.MainPage"
         android:label="fragment_main_page"
-        tools:layout="@layout/fragment_main_page" />
+        tools:layout="@layout/fragment_main_page" >
+        <action
+            android:id="@+id/action_mainPage_to_welcomePage"
+            app:destination="@id/welcomePage" />
+    </fragment>
 </navigation>

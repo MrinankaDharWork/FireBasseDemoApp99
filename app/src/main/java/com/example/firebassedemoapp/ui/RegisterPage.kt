@@ -1,60 +1,87 @@
 package com.example.firebassedemoapp.ui
 
 import android.os.Bundle
+import android.text.TextUtils
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.navigation.NavController
+import androidx.navigation.Navigation
+import androidx.navigation.Navigation.findNavController
+import androidx.navigation.findNavController
 import com.example.firebassedemoapp.R
+import com.example.firebassedemoapp.databinding.FragmentLoginPageBinding
+import com.example.firebassedemoapp.databinding.FragmentRegisterPageBinding
+import com.google.firebase.auth.FirebaseAuth
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
 
-/**
- * A simple [Fragment] subclass.
- * Use the [RegisterPage.newInstance] factory method to
- * create an instance of this fragment.
- */
 class RegisterPage : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
-    }
+
+    private var _binding: FragmentRegisterPageBinding? = null
+    private val binding get() = _binding!!
+    private lateinit var auth: FirebaseAuth
+    private lateinit var navController: NavController
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_register_page, container, false)
+        _binding = FragmentRegisterPageBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment RegisterPage.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            RegisterPage().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        binding.registerButton.setOnClickListener {
+            val enteredEmail = binding.emailInput.text.toString()
+            val enteredPassword = binding.passwordInput.text.toString()
+            var enteredValidEmailCheck = false
+            var enteredValidPasswordCheck = false
+            auth = FirebaseAuth.getInstance()
+            navController = it.findNavController()
+
+
+            if ((TextUtils.isEmpty(enteredEmail)) || ("@" !in enteredEmail)) {
+                binding.emailInput.error = "Enter a valid Email id"
+            } else{
+                enteredValidEmailCheck = true
             }
+
+            if ((TextUtils.isEmpty(enteredPassword)) || (enteredPassword.length<6) ){
+                binding.passwordInput.error = "Enter a valid 6 Char password"
+            } else{
+                enteredValidPasswordCheck = true
+            }
+
+
+            if (enteredValidEmailCheck && enteredValidPasswordCheck){
+
+                registerUser(enteredEmail,enteredPassword)
+            }
+
+        }
     }
+
+    private fun registerUser(enteredEmail: String, enteredPassword: String) {
+        auth.createUserWithEmailAndPassword(enteredEmail,enteredPassword).addOnCompleteListener {
+            if (it.isSuccessful){
+                navController.navigate(R.id.action_registerPage_to_mainPage)
+                Toast.makeText(requireContext(),"Signed up Successfully",Toast.LENGTH_LONG).show()
+
+            } else{
+                Toast.makeText(requireContext(),"Unsuccessful operation",Toast.LENGTH_LONG).show()
+            }
+        }
+
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        _binding = null
+    }
+
 }
