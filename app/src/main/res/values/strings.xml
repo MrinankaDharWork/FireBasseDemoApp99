@@ -3,4 +3,6 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="welcome_message">Welcome To Firebase \n Demo App</string>
+    <string name="forgot_dialog_message">A link for resetting your password will be sent to your email.</string>
+    <string name="forgot_dialog_title">Provide your email</string>
 </resources>

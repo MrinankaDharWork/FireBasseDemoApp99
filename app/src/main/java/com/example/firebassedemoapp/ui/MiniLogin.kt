@@ -7,10 +7,12 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
 import androidx.navigation.NavController
 import androidx.navigation.NavOptions
 import androidx.navigation.findNavController
 import com.example.firebassedemoapp.R
+import com.example.firebassedemoapp.databinding.ForgotDialogLayoutBinding
 import com.example.firebassedemoapp.databinding.FragmentMiniLoginBinding
 import com.google.firebase.auth.FirebaseAuth
 
@@ -22,12 +24,17 @@ class MiniLogin : Fragment() {
     private lateinit var auth: FirebaseAuth
     private lateinit var navController: NavController
 
+
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
         _binding = FragmentMiniLoginBinding.inflate(inflater, container, false)
+
+
+
         return binding.root
     }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -76,14 +83,10 @@ class MiniLogin : Fragment() {
         binding.forgetPassword.setOnClickListener{
             val enteredEmail = binding.emailInput.text.toString()
 
-            if ((TextUtils.isEmpty(enteredEmail)) || ("@" !in enteredEmail)) {
-                binding.emailInput.error = "Enter a valid Email id"
-            } else{
-                //auth.sendPasswordResetEmail(enteredEmail).addOnCompleteListener {
-                Toast.makeText(requireContext(),"Email sent successfully", Toast.LENGTH_LONG).show()
-                //TODO("Implement reset password method")
-                //}
-            }
+            val forgotDialog = ForgotPassDialog()
+
+            forgotDialog.show(childFragmentManager,"forgot Dialog")
+
 
 
         }
