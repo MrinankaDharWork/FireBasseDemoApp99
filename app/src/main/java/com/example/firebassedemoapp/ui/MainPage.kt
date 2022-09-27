@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.navigation.NavController
+import androidx.navigation.NavOptions
 import androidx.navigation.findNavController
 import com.example.firebassedemoapp.R
 import com.example.firebassedemoapp.databinding.FragmentLoginPageBinding
@@ -33,7 +34,10 @@ class MainPage : Fragment() {
         binding.logout.setOnClickListener {
             FirebaseAuth.getInstance().signOut()
             Toast.makeText(requireContext(),"Logged Out Successfully", Toast.LENGTH_LONG).show()
-            it.findNavController().navigate(R.id.action_mainPage_to_welcomePage)
+            val navOptions: NavOptions = NavOptions.Builder()
+                .setPopUpTo(R.id.mainPage2, true)
+                .build()
+            it.findNavController().navigate(R.id.action_mainPage2_to_miniLogin,null,navOptions)
 
         }
 

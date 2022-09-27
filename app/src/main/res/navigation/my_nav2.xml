@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:app="http://schemas.android.com/apk/res-auto"
+xmlns:tools="http://schemas.android.com/tools"
+android:id="@+id/my_nav2"
+app:startDestination="@id/miniLogin">
+<fragment
+    android:id="@+id/miniLogin"
+    android:name="com.example.firebassedemoapp.ui.MiniLogin"
+    android:label="fragment_mini_login"
+    tools:layout="@layout/fragment_mini_login" >
+    <action
+        android:id="@+id/action_miniLogin_to_miniRegister"
+        app:destination="@id/miniRegister"
+        app:popUpTo="@+id/miniRegister"
+        app:popUpToInclusive="true"/>
+
+    <action
+        android:id="@+id/action_miniLogin_to_mainPage2"
+        app:destination="@id/mainPage2"
+        app:popUpTo="@+id/mainPage2"
+        app:popUpToInclusive="true"/>
+</fragment>
+<fragment
+    android:id="@+id/miniRegister"
+    android:name="com.example.firebassedemoapp.ui.MiniRegister"
+    android:label="fragment_mini_register"
+    tools:layout="@layout/fragment_mini_register" >
+    <action
+        android:id="@+id/action_miniRegister_to_miniLogin"
+        app:destination="@id/miniLogin"
+        app:popUpTo="@+id/miniLogin"
+        app:popUpToInclusive="true"/>
+    <action
+        android:id="@+id/action_miniRegister_to_mainPage2"
+        app:destination="@id/mainPage2"
+        app:popUpTo="@+id/mainPage2"
+        app:popUpToInclusive="true"/>
+</fragment>
+    <fragment
+        android:id="@+id/mainPage2"
+        android:name="com.example.firebassedemoapp.ui.MainPage"
+        android:label="MainPage" >
+        <action
+            android:id="@+id/action_mainPage2_to_miniLogin"
+            app:destination="@id/miniLogin"
+            app:popUpTo="@+id/miniLogin"
+            app:popUpToInclusive="true"/>
+    </fragment>
+</navigation>

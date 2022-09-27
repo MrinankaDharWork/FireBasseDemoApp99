@@ -50,4 +50,5 @@
             android:id="@+id/action_mainPage_to_welcomePage"
             app:destination="@id/welcomePage" />
     </fragment>
+
 </navigation>
